@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "answer/index"
+  get "answer/show"
   resources :questions
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
