@@ -1,25 +1,31 @@
 class AnswersController < ApplicationController
-  before_action :load_question, only: [ :new, :create, :update, :destroy ]
+  before_action :load_question, only: [ :create, :update, :destroy ]
   before_action :load_answer, only: [ :destroy, :update ]
-  def new
-    @answer = @question.answers.new
-  end
+  # def new
+  #   @answer = @question.answers.new
+  # end
 
   def edit
   end
 
   def create
     @answer = @question.answers.new(answer_params)
+
     if @answer.save
-      redirect_to question_path(@question)
-    else
-      render :new
+      respond_to do |format|
+        format.js
+        # format.html { redirect_to question_path(@question) }
+      end
     end
   end
 
   def destroy
-    @answer.destroy
-    redirect_to question_path(@question)
+    if @answer.destroy
+      respond_to do |format|
+        format.js
+        # format.html { redirect_to question_path(@question) }
+      end
+    end
   end
 
   def update

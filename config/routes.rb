@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :questions
-  resources :answers
+  resources :questions do
+      resources :answers, except: [ :new ]
+  end
+
 
   root to: "questions#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
