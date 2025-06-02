@@ -25,6 +25,9 @@ class AnswersController < ApplicationController
         format.js
         # format.html { redirect_to question_path(@question) }
       end
+    else
+        puts "Failed to destroy answer: #{@answer.errors.full_messages}"
+        head :unprocessable_entity
     end
   end
 
@@ -43,7 +46,7 @@ class AnswersController < ApplicationController
   end
 
   def load_answer
-    @answer = Answer.find(params[:id])
+    @answer = @question.answers.find(params[:id])
   end
 
   def answer_params
