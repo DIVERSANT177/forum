@@ -1,6 +1,9 @@
+$('#answer_errors').empty();
+
 <% if @answer.errors.present? %>
     <% @answer.errors.full_messages.each do |m| %>
-        $('#answer_form').before('<%= j m %><br>')
+        
+        $('#answer_errors').append($('<div>').html('<%= j m %>'))
     <% end %>
 <% else %>
     $('.answers').append('<%= j render(@answer) %>');

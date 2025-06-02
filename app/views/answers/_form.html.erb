@@ -1,4 +1,5 @@
 <%= simple_form_for :answer, url: question_answers_path(question_id: @question.id), method: :post, remote: true, id: 'answer_form' do |f| %>
+  <div id="answer_errors"></div>
   <%= f.input :title, label: "Your answer" %>
   <%= f.input :body %>
   <%= f.button :submit, 'Create' %>
