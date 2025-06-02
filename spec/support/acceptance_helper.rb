@@ -5,4 +5,11 @@ module AcceptanceHelper
     fill_in 'Password', with: user.password
     click_on 'Log in'
   end
+
+  def create_answer(question)
+    visit question_path(question)
+    fill_in 'Your answer', with: 'My answer'
+    fill_in 'Body', with: 'text'
+    click_on "Create"
+  end
 end

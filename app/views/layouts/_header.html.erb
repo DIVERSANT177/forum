@@ -1,0 +1,16 @@
+<header>
+  <nav style="padding: 10px; display: flex; justify-content: space-between; align-items: center; background-color: #f8f8f8; border-bottom: 1px solid #ccc;">
+    <h1><%= link_to "Мое приложение", root_path %></h1>
+
+    <% if user_signed_in? %>
+      <!-- Если пользователь авторизован -->
+      <div style="display: flex; align-items: center; gap: 15px;">
+        <span>Привет, <%= current_user.email %></span>
+        <%= link_to "Выйти", destroy_user_session_path, method: :delete, class: "button" %>
+      </div>
+    <% else %>
+      <!-- Если пользователь не авторизован -->
+      <%= link_to "Войти", new_user_session_path, class: "button" %>
+    <% end %>
+  </nav>
+</header>

@@ -1,16 +1,16 @@
 class AnswersController < ApplicationController
   before_action :load_question, only: [ :create, :update, :destroy ]
   before_action :load_answer, only: [ :destroy, :update ]
+  before_action :authenticate_user!
   # def new
   #   @answer = @question.answers.new
   # end
 
-  def edit
-  end
+  # def edit
+  # end
 
   def create
     @answer = @question.answers.new(answer_params)
-
     if @answer.save
       respond_to do |format|
         format.js
@@ -47,6 +47,6 @@ class AnswersController < ApplicationController
   end
 
   def answer_params
-    params.require(:answer).permit(:title, :body)
+    params.require(:answer).permit(:title, :body).merge(user_id: current_user.id)
   end
 end
