@@ -1,3 +1,8 @@
-
-$('.answers').append('<%= j render(@answer) %>');
-$("form")[0].reset();
+<% if @answer.errors.present? %>
+    <% @answer.errors.full_messages.each do |m| %>
+        $('#answer_form').before('<%= j m %><br>')
+    <% end %>
+<% else %>
+    $('.answers').append('<%= j render(@answer) %>');
+    $("form")[0].reset();
+<% end %>

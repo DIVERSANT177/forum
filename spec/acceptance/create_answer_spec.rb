@@ -32,4 +32,13 @@ feature "User answer", %q(
 
     expect(page).to have_content "Log in"
   end
+
+  scenario 'User try to create invalid answer', js: true do
+    sign_in(user)
+    visit question_path(question)
+
+    click_on "Create"
+
+    expect(page).to have_content "can't be blank"
+  end
 end
