@@ -6,6 +6,7 @@ feature "Delete question", %q(
   I want to be able to delete questions
 ) do
   given(:user) { create(:user) }
+  given(:user_test) { create(:user) }
   given(:question) { create(:question, user: user) }
 
   scenario "Non-authenticated user ties to delete question" do
@@ -34,7 +35,7 @@ feature "Delete question", %q(
     scenario "try to delete other user's question", js: true do
       click_on 'Выйти'
 
-      sign_in(user)
+      sign_in(user_test)
       visit question_path(question)
 
       expect(page).not_to have_link "Delete Question"

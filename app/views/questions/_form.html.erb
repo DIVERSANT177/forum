@@ -9,6 +9,10 @@
     <%= form.text_area :body %>
   </div>
 
+  <%= form.simple_fields_for :answers do |attach| %>
+    <%= attach.input :attachment, as: :file, label: 'Attach file' %>
+  <% end %>
+
   <div class="actions">
     <%= form.submit :Create %>
   </div>
