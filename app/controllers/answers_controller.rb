@@ -1,13 +1,13 @@
 class AnswersController < ApplicationController
-  before_action :load_question, only: [ :create, :update, :destroy ]
-  before_action :load_answer, only: [ :destroy, :update ]
+  before_action :load_question
+  before_action :load_answer, except: [ :create ]
   before_action :authenticate_user!
   # def new
   #   @answer = @question.answers.new
   # end
 
-  # def edit
-  # end
+  def edit
+  end
 
   def create
     @answer = @question.answers.new(answer_params)
@@ -32,10 +32,14 @@ class AnswersController < ApplicationController
   end
 
   def update
+    # debugger
     if @answer.update(answer_params)
-      redirect_to question_path(@question)
+      respond_to do |format|
+        format.js
+      end
+      # redirect_to question_path(@question)
     else
-      render :edit
+      # render :edit
     end
   end
 

@@ -10,6 +10,6 @@ module AcceptanceHelper
     visit question_path(question)
     fill_in 'Your answer', with: 'My answer'
     fill_in 'Body', with: 'text'
-    click_on "Create"
+    click_on "Save"
   end
 end

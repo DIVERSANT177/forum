@@ -16,6 +16,7 @@ feature "User answer", %q(
     create_answer(question)
     expect(page).to have_content(answer.title)
     click_link "Delete"
+    # save_and_open_page
     # expect(response).to redirect_to(question_path(question))
     expect(page).not_to have_content(answer.title)
   end

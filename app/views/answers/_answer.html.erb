@@ -1,8 +1,13 @@
 <div class="answer" id="answer_<%= answer.id %>">
   <h3><%= answer.title %></h3>
   <p><%= answer.body %></p>
-  <div>
-    <%= link_to "Delete", [@question, answer], method: :delete, remote: true %>
-  </div>
+  <% if user_signed_in? %>
+    <div>
+      <%= link_to "Edit", edit_question_answer_path(@question, answer), remote: true %>
+    </div>
+    <div>
+      <%= link_to "Delete", [@question, answer], method: :delete, remote: true %>
+    </div>
+  <% end %>
   <hr>
 </div>

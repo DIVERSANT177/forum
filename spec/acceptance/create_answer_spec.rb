@@ -14,7 +14,7 @@ feature "User answer", %q(
 
     fill_in 'Your answer', with: 'My answer'
     fill_in 'Body', with: 'text'
-    click_on "Create"
+    click_on "Save"
     # save_and_open_page
     expect(current_path).to eq question_path(question)
 
@@ -28,7 +28,7 @@ feature "User answer", %q(
 
     fill_in 'Your answer', with: 'My answer'
     fill_in 'Body', with: 'text'
-    click_on "Create"
+    click_on "Save"
 
     expect(page).to have_content "Log in"
   end
@@ -37,7 +37,7 @@ feature "User answer", %q(
     sign_in(user)
     visit question_path(question)
 
-    click_on "Create"
+    click_on "Save"
 
     expect(page).to have_content "can't be blank"
   end
