@@ -1,7 +1,7 @@
 <div class="answer" id="answer_<%= answer.id %>">
   <h3><%= answer.title %></h3>
   <p><%= answer.body %></p>
-  <% if user_signed_in? %>
+  <% if current_user && current_user == answer.user %>
     <div>
       <%= link_to "Edit", edit_question_answer_path(@question, answer), remote: true %>
     </div>

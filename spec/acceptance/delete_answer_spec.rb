@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature "User answer", %q(
+feature "Delete answer", %q(
   To remove incorrect knowledge
   As an authenticated user
   I want to be able to delete answers
@@ -17,17 +17,11 @@ feature "User answer", %q(
     expect(page).to have_content(answer.title)
     click_link "Delete"
     # save_and_open_page
-    # expect(response).to redirect_to(question_path(question))
     expect(page).not_to have_content(answer.title)
   end
 
-  # scenario 'Non-authenticated user create answer', js: true do
-  #   visit question_path(question)
-
-  #   fill_in 'Your answer', with: 'My answer'
-  #   fill_in 'Body', with: 'text'
-  #   click_on "Create"
-
-  #   expect(page).to have_content "Log in"
-  # end
+  scenario 'Non-authenticated user delete answer', js: true do
+    visit question_path(question)
+    expect(page).not_to have_link "Delete"
+  end
 end

@@ -18,16 +18,16 @@ feature "Answer editing", %q(
     before do
       sign_in(user)
       visit question_path(question)
-    end
-    scenario 'sees link to edit', js: true do
       create_answer(question)
+    end
+
+    scenario 'sees link to edit', js: true do
       within '.answers' do
         expect(page).to have_link 'Edit'
       end
     end
 
     scenario 'try to edit his answer', js: true do
-      create_answer(question)
       within '.answers' do
         click_on 'Edit'
         fill_in 'Your answer', with: 'Edit answer'
@@ -38,7 +38,13 @@ feature "Answer editing", %q(
       expect(page).to have_content 'Edit answer'
     end
 
-    scenario "try to edit other user's question" do
+    scenario "try to edit other user's answer", js: true do
+      click_on 'Выйти'
+      sleep 3
+      sign_in(user)
+      visit question_path(question)
+
+      expect(page).to_not have_link 'Edit'
     end
   end
 end
