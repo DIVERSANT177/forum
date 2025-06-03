@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_06_02_070424) do
+ActiveRecord::Schema[7.2].define(version: 2025_06_03_103503) do
   create_table "answers", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -20,6 +20,14 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_02_070424) do
     t.integer "user_id", null: false
     t.index ["question_id"], name: "index_answers_on_question_id"
     t.index ["user_id"], name: "index_answers_on_user_id"
+  end
+
+  create_table "attachments", force: :cascade do |t|
+    t.string "file"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "question_id"
+    t.index ["question_id"], name: "index_attachments_on_question_id"
   end
 
   create_table "questions", force: :cascade do |t|

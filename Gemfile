@@ -24,6 +24,8 @@ gem "launchy"
 gem "jquery-rails"
 
 gem "simple_form"
+
+gem "carrierwave", "~> 3.0"
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
 
