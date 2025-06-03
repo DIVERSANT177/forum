@@ -3,6 +3,11 @@
 <div class="question-body">
   <p><%= @question.body %></p>
 </div>
+<% @question.attachments.each do |attachment| %>
+  <% if attachment.file.present? %>
+    <%= link_to "#{attachment.file.file.filename}", attachment.file.url %>
+  <% end %>
+<% end %>
 <% if current_user && current_user == @question.user %>
   <div class="delete-question">
     <%= link_to "Delete Question", @question, method: :delete, data: { confirm: "Are you sure?" } %>
