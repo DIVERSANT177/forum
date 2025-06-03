@@ -5,7 +5,7 @@
 </div>
 <% @question.attachments.each do |attachment| %>
   <% if attachment.file.present? %>
-    <%= link_to "#{attachment.file.file.filename}", attachment.file.url %>
+    <%= link_to "#{attachment.file.identifier}", attachment.file.url %>
   <% end %>
 <% end %>
 <% if current_user && current_user == @question.user %>
