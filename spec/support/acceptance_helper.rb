@@ -10,12 +10,9 @@ module AcceptanceHelper
 
   def create_question
     visit questions_path
-    # debugger
     click_on 'Ask question'
-
     fill_in 'Title', with: "MyTitle"
     fill_in 'Body', with: "MyBody"
-
     click_on 'Create'
   end
 

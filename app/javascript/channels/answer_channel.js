@@ -16,7 +16,6 @@ consumer.subscriptions.create("AnswerChannel", {
 
     const currentUserID = window.currentUserId
 
-
     if (data.user_id === currentUserID) return
 
     if (container) {
