@@ -23,13 +23,13 @@ feature "Answer editing", %q(
     end
 
     scenario 'sees link to edit', js: true do
-      within '.answers' do
+      within '#answers' do
         expect(page).to have_link 'Edit'
       end
     end
 
     scenario 'try to edit his answer', js: true do
-      within '.answers' do
+      within '#answers' do
         click_on 'Edit'
         fill_in 'Your answer', with: 'Edit answer'
         click_on 'Save'

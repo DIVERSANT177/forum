@@ -23,6 +23,15 @@
   </head>
 
   <body>
+    <% if user_signed_in? %>
+      <script type="text/javascript">
+        window.currentUserId = <%= current_user.id %>;
+      </script>
+    <% else %>
+      <script type="text/javascript">
+        window.currentUserId = null;
+      </script>
+    <% end %>
     <%= render "layouts/header" %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>

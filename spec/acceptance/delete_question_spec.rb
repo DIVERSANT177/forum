@@ -34,6 +34,7 @@ feature "Delete question", %q(
 
     scenario "try to delete other user's question", js: true do
       click_on 'Выйти'
+      sleep 1
 
       sign_in(user_test)
       visit question_path(question)

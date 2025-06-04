@@ -2,9 +2,7 @@ class AnswersController < ApplicationController
   before_action :load_question
   before_action :load_answer, except: [ :create ]
   before_action :authenticate_user!
-  # def new
-  #   @answer = @question.answers.new
-  # end
+
 
   def edit
   end
@@ -12,6 +10,12 @@ class AnswersController < ApplicationController
   def create
     @answer = @question.answers.new(answer_params)
     if @answer.save
+      ActionCable.server.broadcast(
+      "answers",
+      {
+        user_id: current_user.id,
+        answer_html: render_to_string(partial: "answers/answer", locals: { answer: @answer })
+      })
       respond_to do |format|
         format.js
         # format.html { redirect_to question_path(@question) }

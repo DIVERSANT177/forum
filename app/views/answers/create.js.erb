@@ -6,6 +6,6 @@ console.log("Form submitted successfully!");
         $('#answer_errors').append($('<div>').html('<%= j m %>'))
     <% end %>
 <% else %>
-    $('.answers').append('<%= j render(@answer) %>');
+    $('#answers').append('<%= j render(@answer) %>');
     $("form")[0].reset();
 <% end %>

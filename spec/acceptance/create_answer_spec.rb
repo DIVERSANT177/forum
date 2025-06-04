@@ -18,7 +18,7 @@ feature "Create answer", %q(
     # save_and_open_page
     expect(current_path).to eq question_path(question)
 
-    within '.answers' do
+    within '#answers' do
       expect(page).to have_content "My answer"
     end
   end

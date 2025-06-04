@@ -1,6 +1,8 @@
 require 'rails_helper'
+include ActionCable::TestHelper
 
 RSpec.describe QuestionsController, type: :controller do
+  # let(:user) { create(:user) }
   let(:question) { create(:question) }
 
   describe "GET #index" do
@@ -72,6 +74,13 @@ RSpec.describe QuestionsController, type: :controller do
       it "redirects to show view" do
         post :create, params: { question: attributes_for(:question) }
         expect(response).to redirect_to question_path(assigns(:question))
+      end
+
+      it "broadcasts a new question" do
+        # debugger
+        expect {
+          post :create, params: { question: attributes_for(:question) }
+        }.to have_broadcasted_to("questions")
       end
     end
 
