@@ -6,6 +6,7 @@ feature "Answer editing", %q(
   I'd like to be able to egit my answer
 ) do
   given(:user) { create(:user) }
+  given(:user1) { create(:user) }
   given(:question) { create(:question, user: user) }
   given(:answer) { create(:answer, question: question, user: user) }
 
@@ -40,10 +41,10 @@ feature "Answer editing", %q(
 
     scenario "try to edit other user's answer", js: true do
       click_on 'Выйти'
-      sleep 3
-      sign_in(user)
+      sleep 1
+      sign_in(user1)
       visit question_path(question)
-
+      # debugger
       expect(page).to_not have_link 'Edit'
     end
   end

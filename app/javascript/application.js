@@ -3,6 +3,7 @@ import "jquery3"
 import "jquery_ujs"
 import "@hotwired/turbo-rails"
 import "controllers"
+//= require jquery.remotipart
 
 Turbo.start()
 

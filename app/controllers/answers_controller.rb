@@ -23,7 +23,6 @@ class AnswersController < ApplicationController
     if @answer.destroy
       respond_to do |format|
         format.js
-        # format.html { redirect_to question_path(@question) }
       end
     else
         puts "Failed to destroy answer: #{@answer.errors.full_messages}"
@@ -37,9 +36,6 @@ class AnswersController < ApplicationController
       respond_to do |format|
         format.js
       end
-      # redirect_to question_path(@question)
-    else
-      # render :edit
     end
   end
 
@@ -54,6 +50,6 @@ class AnswersController < ApplicationController
   end
 
   def answer_params
-    params.require(:answer).permit(:title, :body).merge(user_id: current_user.id)
+    params.require(:answer).permit(:title, :body, attachments_attributes: [ :id, :file ]).merge(user_id: current_user.id)
   end
 end

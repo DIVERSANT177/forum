@@ -1,5 +1,5 @@
 $('#answer_errors').empty();
-
+console.log("Form submitted successfully!");
 <% if @answer.errors.present? %>
     <% @answer.errors.full_messages.each do |m| %>
         

@@ -1,6 +1,11 @@
 <div class="answer" id="answer_<%= answer.id %>">
   <h3><%= answer.title %></h3>
   <p><%= answer.body %></p>
+  <% answer.attachments.each do |attachment| %>
+    <% if attachment.file.present? %>
+      <%= link_to "#{attachment.file.identifier}", attachment.file.url %>
+    <% end %>
+  <% end %>
   <% if current_user && current_user == answer.user %>
     <div>
       <%= link_to "Edit", edit_question_answer_path(@question, answer), remote: true %>

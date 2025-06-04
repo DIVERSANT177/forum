@@ -6,8 +6,8 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    # @answer = @question.answers.new('title': 1, body: 2)
-    # @answers = @question.answers
+    @answer = Answer.new
+    @answer.attachments.build
   end
 
   def new
@@ -47,6 +47,6 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:title, :body, attachments_attributes: [ :id, :file, :_destroy ]).merge(user_id: current_user.id)
+    params.require(:question).permit(:title, :body, attachments_attributes: [ :id, :file ]).merge(user_id: current_user.id)
   end
 end

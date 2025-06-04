@@ -2,9 +2,17 @@
 <% method = params[:action] == 'show' ? :post : :put %>
 <% url = params[:action] == 'show' ? 'question_answers_path' : 'question_answer_path' %>
 <% id_form = params[:action] == 'show' ? "create-form" : "edit-form" %>
-<%= simple_form_for :answer, url: send(url, question_id: @question.id), method: method, remote: true, id: id_form do |f| %>
+
+<%= simple_form_for @answer, url: send(url, question_id: @question.id), method: method, remote: true, id: id_form do |f| %>
   <div id="answer_errors"></div>
   <%= f.input :title, label: "Your answer" %>
   <%= f.input :body %>
+  
+  <%= f.simple_fields_for :attachments do |attachment_fields| %>
+    <div class="nested-fields">
+      <%= attachment_fields.input :file, as: :file, label: 'File' %>
+    </div>
+  <% end %>
+
   <%= f.button :submit, 'Save' %>
 <% end %>
