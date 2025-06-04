@@ -12,4 +12,4 @@ $(document).on('ajaxError', function(event, xhr) {
   if (xhr.status === 401) {
     window.location.href = '/users/sign_in';
   }
-});
+});import "channels"

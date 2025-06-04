@@ -21,7 +21,14 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new(question_params)
     if @question.save
-      redirect_to @question, notice: "Your question successfully created"
+      ActionCable.server.broadcast(
+      "questions",
+      {
+        question_html: render_to_string(partial: "questions/question", locals: { question: @question })
+      }
+    )
+      # redirect_to @question, notice: "Your question successfully created"
+      head :ok
     else
       render :new
     end
