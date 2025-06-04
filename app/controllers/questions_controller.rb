@@ -27,8 +27,7 @@ class QuestionsController < ApplicationController
         question_html: render_to_string(partial: "questions/question", locals: { question: @question })
       }
     )
-      # redirect_to @question, notice: "Your question successfully created"
-      head :ok
+      redirect_to @question, notice: "Your question successfully created"
     else
       render :new
     end
