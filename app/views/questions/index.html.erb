@@ -1,6 +1,6 @@
-
-<%= link_to 'Ask question', new_question_path %>
-
+<% if can? :create, Question %>
+  <%= link_to 'Ask question', new_question_path %>
+<% end %>
 <h1>Список вопросов</h1>
 
 <div id="questions">

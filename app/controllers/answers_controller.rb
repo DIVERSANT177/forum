@@ -3,6 +3,7 @@ class AnswersController < ApplicationController
   before_action :load_answer, except: [ :create ]
   before_action :authenticate_user!
 
+  load_and_authorize_resource
 
   def edit
   end

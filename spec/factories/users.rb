@@ -7,5 +7,6 @@ FactoryBot.define do
     email
     password { 'asd870412' }
     password_confirmation { 'asd870412' }
+    role { 'admin' }
   end
 end

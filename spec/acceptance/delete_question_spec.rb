@@ -17,6 +17,7 @@ feature "Delete question", %q(
   describe "Authenticated user" do
     before do
       sign_in(user)
+      sleep 1
       create_question
     end
 

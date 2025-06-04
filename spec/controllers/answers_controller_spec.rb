@@ -33,8 +33,11 @@ RSpec.describe AnswersController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    sign_in_user
-    before { answer }
+    before do
+      @request.env['devise.mapping'] = Devise.mappings[:user]
+      sign_in user
+      answer
+    end
     it "deletes answer" do
       expect { delete :destroy, params: { id: answer, question_id: question.id }, format: :js }.to change(Answer, :count).by(-1)
     end
