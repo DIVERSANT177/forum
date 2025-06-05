@@ -12,5 +12,6 @@ class Ability
 
     return unless user.admin?
     can :manage, Question, user: user
+    can :manage, :all
   end
 end

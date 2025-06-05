@@ -9,4 +9,8 @@ FactoryBot.define do
     password_confirmation { 'asd870412' }
     role { 'admin' }
   end
+
+  trait :usually do
+    role { 'user' }
+  end
 end
