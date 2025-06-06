@@ -1,12 +1,6 @@
 require "rails_helper"
-# require 'rack/test/utils'
 
 RSpec.describe 'Profile API', type: :request do
-  # include Rack::Test::Methods
-
-  # def app
-  #   Rails.application
-  # end
   describe 'GET /me' do
     context 'unauthorized' do
       it 'returns 401 status if there is no access_token' do
