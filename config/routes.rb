@@ -1,9 +1,17 @@
+require "sidekiq/web"
+
 Rails.application.routes.draw do
+  mount Sidekiq::Web => "/sidekiq"
   use_doorkeeper
   devise_for :users
+  get "test/run", to: "questions#test", as: "run_test"
+  # get "/questions/export", to: "questions#export_all", as: "export_questions"
+  get "/system/temp_csv/:filename", to: "exports#download", as: "download_csv"
   resources :questions do
       resources :answers, except: [ :new, :show ]
   end
+
+
 
   namespace :api do
     namespace :v1 do

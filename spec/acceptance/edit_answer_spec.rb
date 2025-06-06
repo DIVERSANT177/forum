@@ -44,7 +44,6 @@ feature "Answer editing", %q(
       sleep 1
       sign_in(user1)
       visit question_path(question)
-      # debugger
       expect(page).to_not have_link 'Edit'
     end
   end

@@ -36,7 +36,6 @@ class AnswersController < ApplicationController
   end
 
   def update
-    # debugger
     if @answer.update(answer_params)
       respond_to do |format|
         format.js

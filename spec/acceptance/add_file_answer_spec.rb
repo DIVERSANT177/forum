@@ -16,7 +16,6 @@ feature "Add_file_to_answer", %q(
   scenario 'User adds file when asks question', js: true do
     fill_in 'Your answer', with: 'Test answer'
     fill_in 'Body', with: 'text'
-    # debugger
     attach_file 'File', "#{Rails.root}/spec/spec_helper.rb"
     click_on "Save"
     expect(page).to have_link "spec_helper.rb", href: "/uploads/attachment/file/1/spec_helper.rb"

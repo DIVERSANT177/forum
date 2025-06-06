@@ -77,7 +77,6 @@ RSpec.describe QuestionsController, type: :controller do
       end
 
       it "broadcasts a new question" do
-        # debugger
         expect {
           post :create, params: { question: attributes_for(:question) }
         }.to have_broadcasted_to("questions")

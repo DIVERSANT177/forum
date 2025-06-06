@@ -48,6 +48,16 @@ class QuestionsController < ApplicationController
     redirect_to questions_path
   end
 
+  # def export_all
+  #   TestWorker.set(queue: :default).perform_async(current_user.id)
+  #   redirect_to questions_path, notice: "Фоновая задача запущена. Он скачается автоматически."
+  # end
+
+  def test
+    TestWorker.perform_async(current_user.id)
+    redirect_to questions_path, notice: "Фоновая задача запущена"
+  end
+
   private
 
   def load_question
