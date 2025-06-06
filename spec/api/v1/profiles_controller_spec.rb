@@ -2,18 +2,7 @@ require "rails_helper"
 
 RSpec.describe 'Profile API', type: :request do
   describe 'GET /me' do
-    context 'unauthorized' do
-      it 'returns 401 status if there is no access_token' do
-        get '/api/v1/profiles/me.json'
-        # debugger
-        expect(response.status).to eq 401
-      end
-
-      it 'returns 401 status if access_token is invalid' do
-        get '/api/v1/profiles/me.json', headers: { Authorization: '1234' }
-        expect(response.status).to eq 401
-      end
-    end
+    it_behaves_like "API Authenticable"
 
     context 'authorized' do
       let!(:user) { create(:user) }
@@ -44,6 +33,10 @@ RSpec.describe 'Profile API', type: :request do
       it "does not contain password" do
         expect(response.body).to_not have_json_path('encrypted_password')
       end
+    end
+
+    def do_request(options = {})
+      get '/api/v1/profiles/me', params: options.fetch(:params, {}), headers: options.fetch(:headers, {})
     end
   end
 end
