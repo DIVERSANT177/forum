@@ -2,7 +2,7 @@
   <%= link_to 'Ask question', new_question_path %>
 <% end %>
 <h1>Список вопросов</h1>
-
+<h2><%= link_to "Выгрузить все вопросы", run_test_path %></h2>
 
 <div class="form-group">
   <%= label_tag :question_search, "Поиск вопроса" %>
@@ -17,7 +17,6 @@
         minimum_input_length: 3
       } %>
 </div>
-
 
 <div id="questions">
   <%= render @questions %>
