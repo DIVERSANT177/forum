@@ -48,10 +48,37 @@ class QuestionsController < ApplicationController
     redirect_to questions_path
   end
 
-  # def export_all
-  #   TestWorker.set(queue: :default).perform_async(current_user.id)
-  #   redirect_to questions_path, notice: "Фоновая задача запущена. Он скачается автоматически."
+  # def search
+  #   if params[:query].present?
+  #     debugger
+  #     @questions = Question.search(params[:query])
+  #   else
+  #     @questions = []
+  #   end
   # end
+
+  def search
+    query = params[:query].to_s.strip
+    results = []
+
+    if query.length >= 3
+      questions = Question.where("title LIKE ? OR body LIKE ?",
+                  "%#{query}%", "%#{query}%")
+      results = questions.map do |q|
+        {
+          id: q.id,
+          title: q.title,
+          body: q.body,
+          text: q.title # для совместимости
+        }
+      end
+    end
+
+    render json: {
+      items: results,
+      total_count: results.count
+    }
+  end
 
   def test
     TestWorker.perform_async(current_user.id)

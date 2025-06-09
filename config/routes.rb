@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get "test/run", to: "questions#test", as: "run_test"
   # get "/questions/export", to: "questions#export_all", as: "export_questions"
   get "/system/temp_csv/:filename", to: "exports#download", as: "download_csv"
+  get "questions/search", to: "questions#search", as: :search_questions
   resources :questions do
       resources :answers, except: [ :new, :show ]
   end

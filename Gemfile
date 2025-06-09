@@ -40,6 +40,11 @@ gem "sidekiq"
 gem "csv"
 
 gem "redis"
+
+gem "mysql2",          "~> 0.4",    platform: :ruby
+gem "jdbc-mysql",      "~> 5.1.35", platform: :jruby
+gem "thinking-sphinx", "~> 5.5"
+gem "select2-rails"
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
 
