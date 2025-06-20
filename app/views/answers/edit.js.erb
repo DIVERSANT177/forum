@@ -1,1 +1,1 @@
-$('#answer_<%= @answer.id %>').html('<%= j render "form" %>')
+$('#answer_<%= @answer.id %>').replaceWith('<%= j render "form" %>')

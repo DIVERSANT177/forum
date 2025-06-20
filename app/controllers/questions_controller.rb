@@ -51,7 +51,6 @@ class QuestionsController < ApplicationController
   def search
     query = params[:query].to_s.strip
     results = []
-    debugger
     if query.length >= 3
       questions = Question.where("title LIKE ? OR body LIKE ?",
                   "%#{query}%", "%#{query}%")
