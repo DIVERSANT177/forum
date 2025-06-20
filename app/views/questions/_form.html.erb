@@ -1,12 +1,35 @@
 <%= simple_form_for @question, html: { class: 'form-with-nested-fields' } do |f| %>
-  <%= f.input :title %>
-  <%= f.input :body %>
+  <div class="mb-3">
+    <%= f.input :title,
+                label: "Заголовок",
+                input_html: { class: "form-control" },
+                label_html: { class: "form-label" },
+                wrapper_html: { class: "mb-3" },
+                error_html: { class: "text-danger" } %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.input :body,
+                as: :text,
+                label: "Текст вопроса",
+                input_html: { rows: 5, class: "form-control" },
+                label_html: { class: "form-label" },
+                wrapper_html: { class: "mb-3" },
+                error_html: { class: "text-danger" } %>
+  </div>
 
   <%= f.simple_fields_for :attachments do |attachment_fields| %>
-    <div class="nested-fields">
-      <%= attachment_fields.input :file, as: :file, label: 'File' %>
+    <div class="nested-fields mb-3">
+      <%= attachment_fields.input :file,
+                                  as: :file,
+                                  label: "Файл",
+                                  input_html: { class: "form-control" },
+                                  label_html: { class: "form-label" },
+                                  error_html: { class: "text-danger" } %>
     </div>
   <% end %>
 
-  <%= f.button :submit %>
+  <div class="d-grid gap-2 d-md-flex justify-content-center">
+    <%= f.button :submit, "Создать", class: "btn btn-primary" %>
+  </div>
 <% end %>

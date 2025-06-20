@@ -1,16 +1,33 @@
 <header>
-  <nav style="padding: 10px; display: flex; justify-content: space-between; align-items: center; background-color: #f8f8f8; border-bottom: 1px solid #ccc;">
-    <h1><%= link_to "Мое приложение", root_path %></h1>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm">
+    <div class="container-fluid">
+      <!-- Логотип / Название -->
+      <a class="navbar-brand fw-bold" href="<%= root_path %>">Мое приложение</a>
 
-    <% if user_signed_in? %>
-      <!-- Если пользователь авторизован -->
-      <div style="display: flex; align-items: center; gap: 15px;">
-        <span>Привет, <%= current_user.email %></span>
-        <%= link_to "Выйти", destroy_user_session_path, method: :delete, class: "button" %>
+      <!-- Мобильное меню кнопка -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Правая часть навбара -->
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav align-items-center">
+          <% if user_signed_in? %>
+            <!-- Если пользователь авторизован -->
+            <li class="nav-item me-3">
+              <span class="nav-link text-muted"><i class="bi bi-person-circle me-1"></i>Привет, <%= current_user.email %></span>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Выйти", destroy_user_session_path, method: :delete, class: "btn btn-outline-danger btn-sm" %>
+            </li>
+          <% else %>
+            <!-- Если пользователь не авторизован -->
+            <li class="nav-item">
+              <%= link_to "Войти", new_user_session_path, class: "btn btn-primary btn-sm" %>
+            </li>
+          <% end %>
+        </ul>
       </div>
-    <% else %>
-      <!-- Если пользователь не авторизован -->
-      <%= link_to "Войти", new_user_session_path, class: "button" %>
-    <% end %>
+    </div>
   </nav>
 </header>

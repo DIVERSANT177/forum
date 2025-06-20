@@ -11,10 +11,10 @@ feature "Create question", %q(
     sign_in(user)
 
     visit questions_path
-    click_on 'Ask question'
-    fill_in 'Title', with: 'Test question'
-    fill_in 'Body', with: 'text text'
-    click_on 'Create'
+    click_on 'Задать вопрос'
+    fill_in 'Заголовок', with: 'Test question'
+    fill_in 'Текст вопроса', with: 'text text'
+    click_on 'Создать'
 
     expect(page).to have_content 'Your question successfully created'
   end

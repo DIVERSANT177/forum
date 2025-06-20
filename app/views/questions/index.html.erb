@@ -1,23 +1,40 @@
-<% if can? :create, Question %>
-  <%= link_to 'Ask question', new_question_path %>
-<% end %>
-<h1>Список вопросов</h1>
-<h2><%= link_to "Выгрузить все вопросы", run_test_path %></h2>
+<div class="container-fluid">
+  <!-- Заголовок и кнопка -->
+  <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+    <h2 class="mb-0 me-3">
+      Список вопросов
+    </h2>
 
-<div class="form-group">
-  <%= label_tag :question_search, "Поиск вопроса" %>
-  <%= select_tag :question_id, 
-      options_for_select([]),
-      class: 'form-control select2-ajax',
-      include_blank: true,
-      style: 'width: 15%',
-      data: { 
-        url: search_questions_path,
-        placeholder: 'Начните вводить вопрос...',
-        minimum_input_length: 3
-      } %>
-</div>
+    <% if can?(:create, Question) %>
+      <%= link_to 'Задать вопрос', new_question_path, class: "btn btn-success" %>
+    <% end %>
+  </div>
 
-<div id="questions">
-  <%= render @questions %>
+  <!-- Экспорт -->
+  <% if can?(:test, Question) %>
+    <div class="mb-4">
+      <%= link_to "Выгрузить все вопросы", run_test_path, class: "btn btn-outline-secondary btn-sm" %>
+    </div>
+  <% end %>
+
+  <!-- Форма поиска -->
+  <div class="mb-4">
+    <%= label_tag :question_search, "Поиск вопроса", class: "form-label" %>
+    <%= select_tag :question_id,
+        options_for_select([]),
+        class: 'form-control select2-ajax',
+        id: 'search-question',
+        include_blank: true,
+        data: {
+          url: search_questions_path,
+          placeholder: 'Начните вводить вопрос...',
+          minimum_input_length: 3
+        } %>
+  </div>
+
+  <!-- Блок вопросов -->
+  <div id="questions">
+    <%= render @questions %>
+  </div>
+
 </div>

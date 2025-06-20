@@ -12,7 +12,7 @@ feature "Answer editing", %q(
 
   scenario 'Unauthenticated user try to edit question' do
     visit question_path(question)
-    expect(page).to_not have_link 'Edit'
+    expect(page).to_not have_link 'Редактировать'
   end
 
   describe "Authenticated user" do
@@ -24,15 +24,15 @@ feature "Answer editing", %q(
 
     scenario 'sees link to edit', js: true do
       within '#answers' do
-        expect(page).to have_link 'Edit'
+        expect(page).to have_link 'Редактировать'
       end
     end
 
     scenario 'try to edit his answer', js: true do
       within '#answers' do
-        click_on 'Edit'
-        fill_in 'Your answer', with: 'Edit answer'
-        click_on 'Save'
+        click_on 'Редактировать'
+        fill_in 'Заголовок ответа', with: 'Edit answer'
+        click_on 'Сохранить'
       end
 
       expect(page).to_not have_content answer.title
@@ -44,7 +44,7 @@ feature "Answer editing", %q(
       sleep 1
       sign_in(user1)
       visit question_path(question)
-      expect(page).to_not have_link 'Edit'
+      expect(page).to_not have_link 'Редактировать'
     end
   end
 end

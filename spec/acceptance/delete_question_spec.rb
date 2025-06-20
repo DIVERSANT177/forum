@@ -11,7 +11,7 @@ feature "Delete question", %q(
 
   scenario "Non-authenticated user ties to delete question" do
     visit question_path(question)
-    expect(page).not_to have_link "Delete Question"
+    expect(page).not_to have_link "Удалить вопрос"
   end
 
   describe "Authenticated user" do
@@ -22,7 +22,7 @@ feature "Delete question", %q(
     end
 
     scenario 'try to delete his question', js: true do
-      click_on "Delete Question"
+      click_on "Удалить вопрос"
 
       page.driver.browser.switch_to.alert.accept
       expect(current_path).to eq questions_path
@@ -30,7 +30,7 @@ feature "Delete question", %q(
     end
 
     scenario "sees link to delete" do
-      expect(page).to have_link "Delete Question"
+      expect(page).to have_link "Удалить вопрос"
     end
 
     scenario "try to delete other user's question", js: true do
@@ -40,7 +40,7 @@ feature "Delete question", %q(
       sign_in(user_test)
       visit question_path(question)
 
-      expect(page).not_to have_link "Delete Question"
+      expect(page).not_to have_link "Удалить вопрос"
     end
   end
 end

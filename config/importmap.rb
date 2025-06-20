@@ -11,3 +11,7 @@ pin "@rails/actioncable", to: "actioncable.esm.js"
 pin_all_from "app/javascript/channels", under: "channels"
 pin "select2", to: "https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"
 # pin "select2/dist/css/select2.css", to: "https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.css"
+# pin "bootstrap", to: "bootstrap.min.js", preload: true
+# pin "@popperjs/core", to: "popper.js", preload: true
+pin "popper", to: "popper.js"
+pin "bootstrap", to: "bootstrap.min.js"

@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :load_question, only: [ :show, :edit, :update, :destroy  ]
-  before_action :authenticate_user!, except: [ :index, :show ]
+  before_action :authenticate_user!, except: [ :index, :show, :search ]
 
   load_and_authorize_resource
 
@@ -48,19 +48,10 @@ class QuestionsController < ApplicationController
     redirect_to questions_path
   end
 
-  # def search
-  #   if params[:query].present?
-  #     debugger
-  #     @questions = Question.search(params[:query])
-  #   else
-  #     @questions = []
-  #   end
-  # end
-
   def search
     query = params[:query].to_s.strip
     results = []
-
+    debugger
     if query.length >= 3
       questions = Question.where("title LIKE ? OR body LIKE ?",
                   "%#{query}%", "%#{query}%")

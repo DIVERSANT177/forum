@@ -36,3 +36,5 @@
 /config/master.key
 config/*.sphinx.conf
 db/sphinx
+/app/assets/builds/*
+!/app/assets/builds/.keep

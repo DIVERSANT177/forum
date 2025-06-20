@@ -1,18 +1,37 @@
-
 <% method = params[:action] == 'show' ? :post : :put %>
-<% url = params[:action] == 'show' ? 'question_answers_path' : 'question_answer_path' %>
-<% id_form = params[:action] == 'show' ? "create-form" : "edit-form" %>
+<% url = params[:action] == 'show' ? question_answers_path(question_id: @question.id) : question_answer_path(question_id: @question.id, id: @answer.id) %>
+<% id_form = params[:action] == 'show' ? "create-answer-form" : "edit-answer-form" %>
 
-<%= simple_form_for @answer, url: send(url, question_id: @question.id), method: method, remote: true, id: id_form do |f| %>
-  <div id="answer_errors"></div>
-  <%= f.input :title, label: "Your answer" %>
-  <%= f.input :body %>
-  
+<%= simple_form_for(@answer, url: url, method: method, remote: true, id: id_form, html: { class: 'p-3' }) do |f| %>
+  <!-- Блок для ошибок -->
+  <div id="answer_errors" class="alert alert-danger d-none" role="alert">
+    <strong>Пожалуйста, исправьте ошибки:</strong>
+    <ul id="answer_errors_list"></ul>
+  </div>
+
+  <!-- Поля формы -->
+  <%= f.input :title,
+              label: "Заголовок ответа",
+              input_html: { class: 'form-control' },
+              wrapper_html: { class: 'mb-3' } %>
+
+  <%= f.input :body,
+              as: :text,
+              label: "Ваш ответ",
+              input_html: { rows: 5, class: 'form-control' },
+              wrapper_html: { class: 'mb-3' } %>
+
   <%= f.simple_fields_for :attachments do |attachment_fields| %>
-    <div class="nested-fields">
-      <%= attachment_fields.input :file, as: :file, label: 'File' %>
+    <div class="nested-fields mb-3">
+      <%= attachment_fields.input :file,
+                                  as: :file,
+                                  label: 'Прикрепить файл',
+                                  input_html: { class: 'form-control' } %>
     </div>
   <% end %>
 
-  <%= f.button :submit, 'Save' %>
+  <div class="d-flex gap-2">
+    <%= f.button :submit, 'Сохранить', class: "btn btn-primary" %>
+    <%= link_to "Отмена", '#', class: "btn btn-outline-secondary", data: { dismiss: "answer_form" } if params[:action] == 'edit' %>
+  </div>
 <% end %>

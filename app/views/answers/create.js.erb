@@ -1,11 +1,20 @@
-$('#answer_errors').empty();
-console.log("Form submitted successfully!");
-<% if @answer.errors.present? %>
-    <% @answer.errors.full_messages.each do |m| %>
-        
-        $('#answer_errors').append($('<div>').html('<%= j m %>'))
+<% if @answer.errors.any? %>
+  $('#answer_errors_list').empty();
+  $('#answer_errors').removeClass('d-none');
+
+  <% @answer.errors.full_messages.each do |message| %>
+    <% field = message.split(" ").first.downcase %>
+
+    <% if ['title', 'заголовок'].include?(field) && @answer.title.blank? %>
+      $('#answer_errors_list').append('<li>Заполните поле "Заголовок ответа"</li>');
+    <% elsif ['body', 'текст'].include?(field) && @answer.body.blank? %>
+      $('#answer_errors_list').append('<li>Заполните поле "Ваш ответ"</li>');
+    <% else %>
+      $('#answer_errors_list').append('<li><%= message %></li>');
     <% end %>
+  <% end %>
 <% else %>
-    $('#answers').append('<%= j render(@answer) %>');
-    $("form")[0].reset();
+  $('#answer_errors_list').empty();
+  $('#answer_errors').addClass('d-none');
+  location.reload(); // или заменить на обновление части страницы
 <% end %>

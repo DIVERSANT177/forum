@@ -1,22 +1,51 @@
-<h1><%= @question.title %></h1>
+<div class="container my-4">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h2 class="card-title mb-4">
+        <%= @question.title %>
+      </h2>
 
-<div class="question-body">
-  <p><%= @question.body %></p>
-</div>
-<% @question.attachments.each do |attachment| %>
-  <% if attachment.file.present? %>
-    <%= link_to "#{attachment.file.identifier}", attachment.file.url %>
-  <% end %>
-<% end %>
-<% if current_user && current_user == @question.user %>
-  <div class="delete-question">
-    <%= link_to "Delete Question", @question, method: :delete, data: { confirm: "Are you sure?" } %>
+      <div class="mb-3">
+        <p class="card-text"><%= simple_format(@question.body) %></p>
+      </div>
+
+      <!-- Прикреплённые файлы -->
+      <% if @question.attachments.any? %>
+        <div class="mb-3">
+          <strong><i class="bi bi-paperclip me-1"></i>Приложения:</strong>
+          <ul class="list-unstyled">
+            <% @question.attachments.each do |attachment| %>
+              <% if attachment.file.present? %>
+                <li>
+                  <%= link_to attachment.file.identifier, attachment.file.url, target: "_blank", rel: "noopener" %>
+                </li>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <!-- Кнопки управления -->
+      <div class="d-flex gap-2">
+        <%= link_to 'Назад', questions_path, class: "btn btn-outline-secondary btn-sm" %>
+
+        <% if current_user && current_user == @question.user %>
+          <%= link_to "Удалить вопрос", @question, method: :delete,
+                        data: { confirm: "Вы уверены?" },
+                        class: "btn btn-outline-danger btn-sm" %>
+        <% end %>
+      </div>
+    </div>
   </div>
-<% end %>
-<hr>
-<div id="answers">
-    <h2>Answers</h2>
-    <%= render @question.answers %>
-</div>
 
-<%= render 'answers/form' %>
+  <hr class="my-4">
+
+  <!-- Ответы -->
+  <div id="answers" class="mt-4">
+    <h3><i class="bi bi-chat-left-text-fill text-primary me-2"></i>Ответы</h3>
+    <%= render @question.answers %>
+  </div>
+
+  <!-- Форма добавления ответа -->
+  <%= render 'answers/form' %>
+</div>

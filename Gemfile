@@ -17,6 +17,10 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+gem "dartsass-rails", "~> 0.5.1"
+
+gem "bootstrap", "~> 5.3.3"
+
 gem "devise"
 
 gem "launchy"

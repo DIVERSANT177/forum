@@ -10,16 +10,16 @@ module AcceptanceHelper
 
   def create_question
     visit questions_path
-    click_on 'Ask question'
-    fill_in 'Title', with: "MyTitle"
-    fill_in 'Body', with: "MyBody"
-    click_on 'Create'
+    click_on 'Задать вопрос'
+    fill_in 'Заголовок', with: "MyTitle"
+    fill_in 'Текст вопроса', with: "MyBody"
+    click_on 'Создать'
   end
 
   def create_answer(question)
     visit question_path(question)
-    fill_in 'Your answer', with: 'My answer'
-    fill_in 'Body', with: 'text'
-    click_on "Save"
+    fill_in 'Заголовок ответа', with: 'My answer'
+    fill_in 'Ваш ответ', with: 'text'
+    click_on "Сохранить"
   end
 end
