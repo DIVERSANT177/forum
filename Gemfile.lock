@@ -156,6 +156,8 @@ GEM
     ffi (1.17.2-arm-linux-musl)
     ffi (1.17.2-x86_64-linux-gnu)
     ffi (1.17.2-x86_64-linux-musl)
+    font-awesome-sass (6.7.2)
+      sassc (~> 2.0)
     fugit (1.11.1)
       et-orbi (~> 1, >= 1.2.11)
       raabro (~> 1.4)
@@ -418,6 +420,8 @@ GEM
       google-protobuf (~> 4.31)
     sass-embedded (1.89.2-x86_64-linux-musl)
       google-protobuf (~> 4.31)
+    sassc (2.4.0)
+      ffi (~> 1.9)
     securerandom (0.4.1)
     select2-rails (4.0.13)
     selenium-webdriver (4.33.0)
@@ -532,6 +536,7 @@ DEPENDENCIES
   devise
   doorkeeper
   factory_bot_rails
+  font-awesome-sass
   importmap-rails
   jbuilder
   jdbc-mysql (~> 5.1.35)

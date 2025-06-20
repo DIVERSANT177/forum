@@ -34,5 +34,7 @@ module Forum
       g.fixture_replacement :factory_bot, dir: "spec/factories"
     end
     config.time_zone = "Volgograd"
+
+    config.assets.paths << Rails.root.join("lib/assets")
   end
 end

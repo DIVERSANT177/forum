@@ -37,6 +37,8 @@ gem "cancancan"
 
 gem "doorkeeper"
 
+gem "font-awesome-sass"
+
 gem "active_model_serializers", "~> 0.10.2"
 
 gem "sidekiq"
