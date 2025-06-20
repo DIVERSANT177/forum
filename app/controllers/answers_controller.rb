@@ -43,6 +43,13 @@ class AnswersController < ApplicationController
     end
   end
 
+  def rate_up
+    @answer.increment!(:rate)
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
 
   def load_question

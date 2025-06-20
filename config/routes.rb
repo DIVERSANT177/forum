@@ -9,7 +9,11 @@ Rails.application.routes.draw do
   get "/system/temp_csv/:filename", to: "exports#download", as: "download_csv"
   get "questions/search", to: "questions#search", as: :search_questions
   resources :questions do
-      resources :answers, except: [ :new, :show ]
+      resources :answers, except: [ :new, :show ] do
+        member do
+          post "rate_up"
+        end
+      end
   end
 
 

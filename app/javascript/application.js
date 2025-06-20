@@ -8,6 +8,7 @@ import "popper";
 import "bootstrap";
 import "fontawesome"
 import "fontawesome-solid"
+import "rate_answer"
 
 const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
 const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
