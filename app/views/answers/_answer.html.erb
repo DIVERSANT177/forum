@@ -3,10 +3,12 @@
     <div class="d-flex justify-content-between">
       <h5 class="card-title"><%= answer.title %></h5>
       <div>
-        <span id="rate-count-<%= answer.id %>">Рейтинг: <%= answer.rate %></span>
-        <button class="btn btn-outline-primary rate-up-button" type="button" data-answer-id="<%= answer.id %>" data-url="<%= rate_up_question_answer_path(question_id: @question.id, id: answer.id) %>">
-          <i class="fa-solid fa-thumbs-up"></i>
-        </button>
+        <span id="rate-count-<%= answer.id %>">Рейтинг: <%= answer.like.count %></span>
+        <% if current_user && !Like.exists?(user_id: current_user.id, answer_id: answer.id) %>
+          <button class="btn btn-outline-primary rate-up-button" type="button" data-answer-id="<%= answer.id %>" data-url="<%= rate_up_question_answer_path(question_id: @question.id, id: answer.id) %>">
+            <i class="fa-solid fa-thumbs-up">Like</i>
+          </button>
+        <% end %>
       </div>
     </div>
     

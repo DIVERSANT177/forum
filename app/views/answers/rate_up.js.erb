@@ -1,2 +1,2 @@
-$("#rate-count-<%= @answer.id %>").html('Рейтинг: <%= @answer.rate %>')
-$(".rate-up-button[data-answer-id='<%= @answer.id %>']").prop('disabled', true);
+$("#rate-count-<%= @answer.id %>").html('Рейтинг: <%= @answer.like.count %>')
+$(".rate-up-button[data-answer-id='<%= @answer.id %>']").hide();

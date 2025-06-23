@@ -44,9 +44,11 @@ class AnswersController < ApplicationController
   end
 
   def rate_up
-    @answer.increment!(:rate)
-    respond_to do |format|
-      format.js
+    @like = Like.new(answer_id: @answer.id, user_id: current_user.id)
+    if @like.save
+      respond_to do |format|
+        format.js
+      end
     end
   end
 

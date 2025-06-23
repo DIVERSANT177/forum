@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_06_20_123639) do
+ActiveRecord::Schema[7.2].define(version: 2025_06_23_071835) do
   create_table "answers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -18,7 +18,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_20_123639) do
     t.datetime "updated_at", null: false
     t.bigint "question_id", null: false
     t.bigint "user_id", null: false
-    t.integer "rate", default: 0
     t.index ["question_id"], name: "index_answers_on_question_id"
     t.index ["user_id"], name: "index_answers_on_user_id"
   end
@@ -30,6 +29,16 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_20_123639) do
     t.integer "attachmentable_id"
     t.string "attachmentable_type"
     t.index ["attachmentable_id", "attachmentable_type"], name: "index_attachments_on_attachable"
+  end
+
+  create_table "likes", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "answer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["answer_id"], name: "index_likes_on_answer_id"
+    t.index ["user_id", "answer_id"], name: "index_likes_on_user_id_and_answer_id", unique: true
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "oauth_access_grants", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -98,6 +107,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_20_123639) do
 
   add_foreign_key "answers", "questions"
   add_foreign_key "answers", "users"
+  add_foreign_key "likes", "answers"
+  add_foreign_key "likes", "users"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
   add_foreign_key "questions", "users"
