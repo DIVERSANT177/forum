@@ -9,24 +9,47 @@ feature "Rate answer", %q(
   given(:question) { create(:question) }
   given(:answer) { create(:answer, question: question, user: user) }
 
-  describe "Rate answer" do
+  describe "Like answer" do
     before do
       sign_in(user)
       visit question_path(question)
       create_answer(question)
     end
 
-    scenario "Authenticated user rate answer", js: true do
-      find(".rate-up-button", match: :first).click
+    scenario "Authenticated user like answer", js: true do
+      find(".like-button", match: :first).click
 
       expect(page).to have_content("Рейтинг: 1")
     end
 
-    scenario 'Non-authenticated user rate answer', js: true do
+    scenario 'Non-authenticated user like answer', js: true do
       click_on 'Выйти'
       sleep 1
       visit question_path(question)
-      expect(page).to_not have_css(".rate-up-button")
+      expect(page).to_not have_css(".like-button")
+    end
+  end
+
+  describe "Unlike answer" do
+    before do
+      sign_in(user)
+      visit question_path(question)
+      create_answer(question)
+    end
+
+    scenario "Authenticated user unlike answer", js: true do
+      find(".like-button", match: :first).click
+
+      find(".like-button", match: :first).click
+
+      expect(page).to have_content("Рейтинг: 0")
+    end
+
+    scenario 'Non-authenticated user unlike answer', js: true do
+      click_on 'Выйти'
+      sleep 1
+      visit question_path(question)
+      expect(page).to_not have_css(".like-button")
     end
   end
 end

@@ -1,0 +1,5 @@
+$("#rate-count-<%= @answer.id %>").html('Рейтинг: <%= @answer.like.count %>')
+button = $(".like-button[data-answer-id='<%= @answer.id %>']");
+url = button.attr("data-url");
+button.removeClass("btn-primary").addClass("btn-outline-primary");
+button.attr("data-url", url.replace("/unlike", "/like"));

@@ -11,7 +11,8 @@ Rails.application.routes.draw do
   resources :questions do
       resources :answers, except: [ :new, :show ] do
         member do
-          post "rate_up"
+          post "like"
+          delete "unlike"
         end
       end
   end

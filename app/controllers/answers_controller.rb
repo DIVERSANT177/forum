@@ -3,7 +3,7 @@ class AnswersController < ApplicationController
   before_action :load_answer, except: [ :create ]
   before_action :authenticate_user!
 
-  load_and_authorize_resource
+  # load_and_authorize_resource
 
   def edit
   end
@@ -43,12 +43,21 @@ class AnswersController < ApplicationController
     end
   end
 
-  def rate_up
+  def like
     @like = Like.new(answer_id: @answer.id, user_id: current_user.id)
     if @like.save
       respond_to do |format|
         format.js
       end
+    end
+  end
+
+  def unlike
+    @like = Like.find_by(user: current_user, answer: @answer)
+    @like.destroy if @like
+
+    respond_to do |format|
+      format.js
     end
   end
 

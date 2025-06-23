@@ -1,11 +1,10 @@
 $(document).on('turbo:load', function () {
-    $('.rate-up-button').on('click', function (e) {
+    $('.like-button').on('click', function (e) {
         e.preventDefault()
-        const btn = $(this)
-        const url = btn.data('url')
+        let url = $(this).attr('data-url');
         $.ajax({
             url: url,
-            method: 'POST',
+            method: url.includes('/like') ? 'POST' : 'DELETE',
             dataType: 'script'
         })  
     })
