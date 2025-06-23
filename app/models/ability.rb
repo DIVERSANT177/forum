@@ -9,6 +9,7 @@ class Ability
 
     return unless user.present?
     can :manage, Answer, user: user
+    can [ :like, :unlike ], Answer
 
     return unless user.admin?
     can :manage, Question, user: user
