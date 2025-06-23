@@ -2,7 +2,7 @@ class Answer < ApplicationRecord
   belongs_to :user
   belongs_to :question
   has_many :attachments, as: :attachmentable
-  has_many :like
+  has_many :like, dependent: :destroy
 
   validates :title, :body, presence: true
 

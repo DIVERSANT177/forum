@@ -1,5 +1,4 @@
 class QuestionsController < ApplicationController
-  before_action :load_question, only: [ :show, :edit, :update, :destroy  ]
   before_action :authenticate_user!, except: [ :index, :show, :search ]
 
   load_and_authorize_resource
